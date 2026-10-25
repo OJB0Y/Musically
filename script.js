@@ -2957,8 +2957,8 @@ const playlist = [
   {
     title: "La Historia Del Violín", //438
     artist: "Leonel Tuchez",
-    src: "songs/SpotiDownloader.com - La Historia Del Violín - Leonel Tuchez.mp3",
-    cover: getMp3Art("songs/SpotiDownloader.com - La Historia Del Violín - Leonel Tuchez.mp3"),
+    src: "songs/Leonel Tuchez - La Historia Del Violín (SPOTISAVER).mp3",
+    cover: getMp3Art("songs/Leonel Tuchez - La Historia Del Violín (SPOTISAVER).mp3"),
   },
   {
     title: "Casa Nueva", //439
@@ -2969,8 +2969,8 @@ const playlist = [
   {
     title: "Bendeciré a Jehová", //440
     artist: "Anita Morán",
-    src: "songs/Anita Morán - Bendeciré a Jehová (SPOTISAVER).mp3",
-    cover: getMp3Art("songs/Anita Morán - Bendeciré a Jehová (SPOTISAVER).mp3")
+    src: "songs/Bendeciré a Jehová_spotdown.mp3",
+    cover: getMp3Art("songs/Bendeciré a Jehová_spotdown.mp3")
   },
   {
     title: "Más Que Vencedor", //441
