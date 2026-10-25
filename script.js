@@ -2963,8 +2963,8 @@ const playlist = [
   {
     title: "Casa Nueva", //439
     artist: "Leonel Tuchez",
-    src: "songs/SpotiDownloader.com - Casa Nueva - Leonel Tuchez.mp3",
-    cover: getMp3Art("songs/SpotiDownloader.com - Casa Nueva - Leonel Tuchez.mp3"),
+    src: "songs/Leonel Tuchez - Casa Nueva (SPOTISAVER).mp3",
+    cover: getMp3Art("songs/Leonel Tuchez - Casa Nueva (SPOTISAVER).mp3"),
   },
   {
     title: "Bendeciré a Jehová", //440
