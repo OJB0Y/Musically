@@ -3189,6 +3189,14 @@ const playlistOrder = {
   absolutePlaylist : [352, 353, 376, 377, 378, 379, 354, 351, 336, 395, 380, 334, 335, 381, 355, 359, 360, 361, 358, 382, 383, 384, 385, 386, 387, 388, 389, 397, 396, 390, 391, 392, 393, 394, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472],
 };
 
+const artistPages = {
+  Gorillaz: {
+    name: "Gorillaz",
+    banner: "images/Gorillaz-Banner.jpg",
+    label: "ARTIST"
+  }
+};
+
 const playlistHex = {
   LikedSongs: getSongColors("images/Liked.png").then(colors => colors.dark),
   Worship: getSongColors("images/worship.png").then(colors => colors.dark),
@@ -3356,7 +3364,7 @@ async function getSongColors(imageUrl) {
       const b = parseInt(hexColor.slice(5, 7), 16);
 
       if(window.innerWidth > 1400) {
-        return (r * 0.299 + g * 0.587 + b * 0.114) > 200;
+        return (r * 0.299 + g * 0.587 + b * 0.114) > 170;
       }
 
       return (r * 0.299 + g * 0.587 + b * 0.114) > 170;
@@ -3526,6 +3534,13 @@ const bar = document.querySelector('.bar');
 
 const libraryPlaylistEl = document.getElementById('libraryPlaylist');
 const libraryTitle = document.getElementById('libraryTitle');
+const libraryPlaylistHeader = document.getElementById('libraryPlaylistHeader');
+
+const artistBanner = document.getElementById('artistBanner');
+const artistBannerImage = document.getElementById('artistBannerImage');
+const artistProfilePicture = document.getElementById('artistProfilePicture');
+const artistPageName = document.getElementById('artistPageName');
+const artistPageLabel = document.getElementById('artistPageLabel');
 
 const songRequest = document.getElementById("songRequest");
 const closeRequest = document.getElementById("closeRequest");
@@ -4010,18 +4025,24 @@ const queueScreen = document.getElementById('queueScreen');
 const queueList = document.getElementById('queueList');
 const closeQueueBtn = document.querySelector('.close-queue');
 
-// Replace the DOMContentLoaded section with this:
 document.addEventListener('DOMContentLoaded', () => {
+
   const track = document.querySelector('.screen-track');
 
   const navAll = document.getElementById('nav-all');
   const navLibrary = document.getElementById('nav-library');
   const navPlaylists = document.getElementById('nav-playlist');
 
+  // ================= NAVIGATION =================
+
   function goToScreen(index) {
+
     track.style.transform = `translateX(-${index * 100}vw)`;
 
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b =>
+      b.classList.remove('active')
+    );
+
     if (index === 0) navAll.classList.add('active');
     if (index === 1) navLibrary.classList.add('active');
     if (index === 2) navPlaylists.classList.add('active');
@@ -4031,34 +4052,46 @@ document.addEventListener('DOMContentLoaded', () => {
   navLibrary.addEventListener('click', () => goToScreen(1));
   navPlaylists.addEventListener('click', () => goToScreen(2));
 
-  // Ensure correct initial state
   goToScreen(1);
 
-  // Add back button functionality
   const libraryBackBtn = document.getElementById('libraryBackBtn');
+
   if (libraryBackBtn) {
     libraryBackBtn.addEventListener('click', () => goToScreen(1));
   }
 
+
+  // ================= BUILD LIBRARY SONG LIST =================
+
   async function buildLibraryPlaylist(libKey) {
+
     libraryPlaylistEl.innerHTML = '';
 
     const order = playlistOrder[libKey];
-    
+
     if (!order || !Array.isArray(order)) {
       console.error('Invalid playlist order for key:', libKey);
       return;
     }
 
-    currentLibraryQueue = [...order]; // save play order
+    // Only retain valid song indices.
+    currentLibraryQueue = order.filter(songIndex =>
+      Number.isInteger(songIndex) &&
+      songIndex >= 0 &&
+      songIndex < playlist.length
+    );
 
-    order.forEach(songIndex => {
-      // Check if songIndex exists in playlist
-      if (songIndex < 0 || songIndex >= playlist.length) {
-        console.warn(`Song index ${songIndex} not found in playlist for ${libKey}`);
+    order.forEach((songIndex, queuePosition) => {
+
+      if (
+        !Number.isInteger(songIndex) ||
+        songIndex < 0 ||
+        songIndex >= playlist.length
+      ) {
+        console.warn(`Invalid song index ${songIndex} in ${libKey}`);
         return;
       }
-      
+
       const song = playlist[songIndex];
 
       const li = document.createElement('li');
@@ -4068,82 +4101,195 @@ document.addEventListener('DOMContentLoaded', () => {
         <img class="libraryPlaylist-cover" loading="lazy">
 
         <div class="libraryPlaylist-text">
-          <div class="libraryPlaylist-title">${song.title}</div>
-          <div class="libraryPlaylist-artist">${song.artist}</div>
+          <div class="libraryPlaylist-title"></div>
+          <div class="libraryPlaylist-artist"></div>
         </div>
 
-        <button class="options-btn">
+        <button class="options-btn" type="button">
           <svg viewBox="0 0 16 16" fill="#ffffff">
             <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
           </svg>
         </button>
       `;
 
+      // Populate song information safely.
+      li.querySelector('.libraryPlaylist-title').textContent = song.title;
+      li.querySelector('.libraryPlaylist-artist').textContent = song.artist;
+
+      // Load embedded album artwork.
       const songCoverImg = li.querySelector('.libraryPlaylist-cover');
       setSongCover(songCoverImg, song);
 
+      // Song options.
       const optionsBtn = li.querySelector('.options-btn');
 
       optionsBtn.addEventListener('click', (e) => {
-        e.stopPropagation();   // DO NOT play the song
+
+        e.stopPropagation();
+
         openSongOptionsPopup(optionsBtn, songIndex);
-});
+
+      });
 
 
+      // Play selected song.
       li.addEventListener('click', () => {
+
         openPlaylistBtn.style.opacity = 1;
         bottomBar.style.opacity = 1;
-        usingLibraryQueue = true;
-        
-        playbackSource = libKey;
 
-        // Find the index of this song in the current library queue
-        const songPos = currentLibraryQueue.indexOf(songIndex);
-        if (songPos !== -1) {
-          libraryQueueIndex = songPos;
-        } else {
-          libraryQueueIndex = 0;
-        }
-        
-        // Reset shuffle since we're using library order
+        usingLibraryQueue = true;
+
+        playbackSource = libKey;
+        currentPlaylist = libKey;
+
+        updatePlaylistLabel();
+
+        // Use the actual queue position.
+        // This also handles duplicate song indices correctly.
+        libraryQueueIndex = currentLibraryQueue.indexOf(songIndex);
+
+        // Rebuild shuffle queue if shuffle is enabled.
         if (shuffle) {
-          createLibraryShuffleQueue(libraryQueueIndex)
+          createLibraryShuffleQueue(libraryQueueIndex);
         }
-        
+
         changeSong(songIndex);
+
       });
 
       libraryPlaylistEl.appendChild(li);
+
     });
 
-    goToScreen(2); // Go to library playlist screen
   }
 
-  // Function to open library playlist
-  function openLibraryPlaylist(key) {
-    buildLibraryPlaylist(key);
-}
+
+  // ================= OPEN LIBRARY PAGE =================
+
+  async function openLibraryPlaylist(key, button) {
+
+    const order = playlistOrder[key];
+
+    if (!order || !Array.isArray(order)) {
+      console.error('Cannot open library page:', key);
+      return;
+    }
+
+    const artistConfig = artistPages[key];
+
+    const isArtist =
+      button?.dataset.type === 'artist' ||
+      Boolean(artistConfig);
+
+    const image = button?.querySelector('img');
+    const name = button?.querySelector('span')?.textContent.trim() || key;
+
+    // Establish playback source immediately.
+    // This is important when Play is pressed before selecting a song.
+    playbackSource = key;
+    currentPlaylist = key;
+
+    // Reset big shuffle selection whenever a new page opens.
+    bigShuffle = false;
+    libraryBigShuffle.style.color = "#b3b3b3";
+
+
+    // ================= ARTIST PAGE =================
+
+    if (isArtist) {
+
+      if (!artistConfig) {
+        console.error(`Missing artist configuration for: ${key}`);
+        return;
+      }
+
+      // Show artist presentation.
+      artistBanner.style.display = 'block';
+      libraryPlaylistHeader.style.display = 'none';
+
+      // Banner artwork.
+      artistBannerImage.src = artistConfig.banner;
+
+      // Profile picture comes from the library tile.
+      if (image) {
+        artistProfilePicture.src = image.src;
+      }
+
+      // Artist information.
+      artistPageName.textContent = artistConfig.name || name;
+      artistPageLabel.textContent = artistConfig.label || 'ARTIST';
+
+    }
+
+
+    // ================= REGULAR PLAYLIST =================
+
+    else {
+
+      artistBanner.style.display = 'none';
+      libraryPlaylistHeader.style.display = 'flex';
+
+      // Playlist artwork.
+      if (image) {
+
+        libraryPlaylistCover.classList.add('pop');
+        libraryPlaylistCover.src = image.src;
+
+        setTimeout(() => {
+          libraryPlaylistCover.classList.remove('pop');
+        }, 300);
+
+      }
+
+      // Playlist name beside its cover.
+      libraryTitle.textContent = name;
+
+    }
+
+
+    // ================= BACKGROUND COLOR =================
+
+    const hex = playlistHex[key]
+      ? await playlistHex[key]
+      : null;
+
+    const endHex = playlistEndHex[key]
+      ? await playlistEndHex[key]
+      : null;
+
+    if (hex) {
+
+      libraryPlaylistScreen.style.background =
+        `linear-gradient(to bottom, ${hex}, ${endHex || '#121212'}, #121212 57%)`;
+
+    }
+
+
+    // Build the corresponding song list.
+    await buildLibraryPlaylist(key);
+
+    // Open the library page.
+    goToScreen(2);
+
+  }
+
+
+  // ================= LIBRARY BUTTON LISTENER =================
 
   document.querySelectorAll('.library-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const key = btn.dataset.library;
 
-    // get the image from the library tile
-    const img = btn.querySelector('img').src;
+    btn.addEventListener('click', () => {
 
-    // animate + swap
-    libraryPlaylistCover.classList.add('pop');
-    libraryPlaylistCover.src = img;
+      const key = btn.dataset.library;
 
-    setTimeout(() => {
-      libraryPlaylistCover.classList.remove('pop');
-    }, 300);
+      openLibraryPlaylist(key, btn);
 
-    openLibraryPlaylist(key);
+    });
+
   });
-});
 
-});
+});;
 
 
 
@@ -4185,6 +4331,12 @@ function updateCoverSize() {
     player.style.transform = 'translateX(0%)';
     player.style.width = '100%';
   }
+
+  // Artist profile picture
+  if (artistProfilePicture) {
+    artistProfilePicture.style.display =
+      IS_DESKTOP ? 'none' : 'block';
+  }
 }
 
 // Initial call
@@ -4192,14 +4344,7 @@ updateCoverSize();
 
 // Update on window resize
 window.addEventListener('resize', () => {
-  const wasDesktop = IS_DESKTOP;
-  IS_DESKTOP = window.innerWidth >= window.innerHeight;
-  screenWidth = window.innerWidth;
-  
-  // Only update if the state changed
-  if (wasDesktop !== IS_DESKTOP) {
-    updateCoverSize();
-  }
+  updateCoverSize();
 });
 
 // Open queue screen
