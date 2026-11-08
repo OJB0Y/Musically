@@ -3424,22 +3424,26 @@ async function getSongColors(imageUrl) {
     const trueVibrantColor = palette.Vibrant?.getHex() || "#121212";
 
     const originalDarkColor = palette.DarkVibrant?.getHex() || "#121212";
+    const lightColor = palette.LightVibrant?.getHex() || "#121212";
+    const muted = palette.Muted?.getHex() || "#121212";
+    const lightMuted = palette.LightMuted?.getHex() || "#121212";
+    const darkMuted = palette.DarkMuted?.getHex() || "#121212";
 
-    const useVibrantInstead = isBlackOrBrown(originalDarkColor);
+    const needsDesktopDarkFallback =
+      IS_DESKTOP && (
+        isTooDark(originalDarkColor) ||
+        isBlackOrBrown(originalDarkColor)
+      );
+    const useVibrantInstead =
+      !IS_DESKTOP && isBlackOrBrown(originalDarkColor);
 
-    let darkColor = useVibrantInstead
-      ? trueVibrantColor
-      : originalDarkColor;
+    let darkColor = needsDesktopDarkFallback
+      ? darkMuted
+      : useVibrantInstead
+        ? trueVibrantColor
+        : originalDarkColor;
 
     let vibrantColor = trueVibrantColor;
-
-    const lightColor = palette.LightVibrant?.getHex() || "#121212";
-
-    const muted = palette.Muted?.getHex() || "#121212";
-
-    const lightMuted = palette.LightMuted?.getHex() || "#121212";
-
-    const darkMuted = palette.DarkMuted?.getHex() || "#121212";
     
       
   // Adjust Vibrant color
