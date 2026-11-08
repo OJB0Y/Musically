@@ -3397,6 +3397,16 @@ async function getSongColors(imageUrl) {
       const [vH, vS, vL] = hexToHsl(vibrantColor);
       const [dH, dS, dL] = hexToHsl(darkColor);
 
+      // Neutral backgrounds should produce a light neutral accent, rather than
+      // forcing the artwork's dominant hue onto grey.
+      if (dS < 0.12) {
+          const neutralLightness = Math.max(
+              0.58,
+              Math.min(0.72, dL + 0.32)
+          );
+          return hslToHex(vH, Math.min(vS, 0.12), neutralLightness);
+      }
+
       // Calculate the shortest distance between two hues (0–180 degrees)
       const hueDifference = Math.abs(vH - dH);
       const hueDistance = Math.min(hueDifference, 360 - hueDifference);
