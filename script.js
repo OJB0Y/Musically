@@ -3209,7 +3209,7 @@ const playlistHex = {
   ROADTRIP: getSongColors("images/ROADTRIP.png").then(colors => colors.dark),
   LocosComoYo: getSongColors("images/LocosComoYo.png").then(colors => colors.dark),
   absolutePlaylist: getSongColors("images/Cover of absolute playlist 🙌 by Orane GOAT.jpg").then(colors => colors.dark),
-  Gorillaz: getSongColors("images/Gorillaz-Pfp.jpg").then(colors => colors.dark),
+  Gorillaz: getPlaylistEndHex("images/Gorillaz-Banner.jpg"),
 };
 
 const playlistEndHex = {
@@ -3224,7 +3224,7 @@ const playlistEndHex = {
   ROADTRIP: getPlaylistEndHex("images/ROADTRIP.png"),
   LocosComoYo: getPlaylistEndHex("images/LocosComoYo.png"),
   absolutePlaylist: getPlaylistEndHex("images/Cover of absolute playlist 🙌 by Orane GOAT.jpg"),
-  Gorillaz: getPlaylistEndHex("images/Gorillaz-Pfp.jpg"),
+  Gorillaz: getPlaylistEndHex("images/Gorillaz-Banner.jpg"),
 };
 
 async function getPlaylistEndHex(imageUrl) {
@@ -3993,6 +3993,8 @@ document.querySelectorAll('.library-btn').forEach(btn => {
     if (hex) {
       libraryPlaylistScreen.style.background =
         `linear-gradient(to bottom, ${hex}, ${endHex}, #121212 57%)`;
+      
+      libraryPlaylistScreen.style.backgroundAttachment = 'local';
     }
 
     // Cover animation
@@ -4260,11 +4262,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (hex) {
 
-      libraryPlaylistScreen.style.background =
-        `linear-gradient(to bottom, ${hex}, ${endHex || '#121212'}, #121212 57%)`;
+      libraryPlaylistScreen.style.setProperty(
+        '--library-gradient',
+        `linear-gradient(to bottom, ${hex}, ${endHex || '#121212'}, #121212 100%)`
+      );
 
     }
 
+
+    // Reset the page's scroll position.
+    libraryPlaylistScreen.scrollTop = 0;
+
+    // Reset the song list's scroll position.
+    libraryPlaylistEl.scrollTop = 0;
 
     // Build the corresponding song list.
     await buildLibraryPlaylist(key);
