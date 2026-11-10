@@ -2586,6 +2586,7 @@ const playlist = [
     artist: "Gorillaz, Thundercat",
     src: "songs/Gorillaz, Thundercat - Cracker Island (feat. Thundercat) (SPOTISAVER).mp3",
     cover: getMp3Art("songs/Gorillaz, Thundercat - Cracker Island (feat. Thundercat) (SPOTISAVER).mp3"),
+    video: "videos/Gorillaz2.mp4",
   },
   {
     title: "DARE (feat. Shaun Ryder & Roses Gabor)", //377
@@ -2786,6 +2787,7 @@ const playlist = [
     artist: "Gorillaz",
     src: "songs/Gorillaz - The Tired Influencer (SPOTISAVER).mp3",
     cover: getMp3Art("songs/Gorillaz - The Tired Influencer (SPOTISAVER).mp3"),
+    video: "videos/Gorillaz2.mp4",
   },
   {
     title: "Orange County (feat. Bizarrap, Kara Jackson and Anoushka Shankar)", //410
@@ -2828,12 +2830,15 @@ const playlist = [
     artist: "Gorillaz, Snoop Dogg, Jamie Principle",
     src: "songs/Gorillaz, Snoop Dogg, Jamie Principle - Hollywood (feat. Snoop Dogg & Jamie Principle) (SPOTISAVER).mp3",
     cover: getMp3Art("songs/Gorillaz, Snoop Dogg, Jamie Principle - Hollywood (feat. Snoop Dogg & Jamie Principle) (SPOTISAVER).mp3"),
+    video: "videos/Gorillaz1.mp4",
+    lrc: "LRC files/Hollywood (feat. Snoop Dogg & Jamie Principle) - Gorillaz, Snoop Dogg, Jamie Principle.lrc",
   },
   {
     title: "Oil (feat. Stevie Nicks)", //417
     artist: "Gorillaz, Stevie Nicks",
     src: "songs/Gorillaz, Stevie Nicks - Oil (feat. Stevie Nicks) (SPOTISAVER).mp3",
     cover: getMp3Art("songs/Gorillaz, Stevie Nicks - Oil (feat. Stevie Nicks) (SPOTISAVER).mp3"),
+    video: "videos/Gorillaz2.mp4",
   },
   {
     title: "Momentary Bliss (feat. slowthai and Slaves)", //418
