@@ -2668,7 +2668,7 @@ const playlist = [
     src: "songs/Gorillaz - Tranz (SPOTISAVER).mp3",
     cover: getMp3Art("songs/Gorillaz - Tranz (SPOTISAVER).mp3"),
     video: "videos/Gorillaz6.mp4",
-    lrc: "LRC files/Tranz-Gorillaz.lrc",
+    lrc: "LRC files/Tranz - Gorillaz.lrc",
   },
   {
     title: "Snoop Will Make You Dance", //390
