@@ -2667,6 +2667,8 @@ const playlist = [
     artist: "Gorillaz",
     src: "songs/Gorillaz - Tranz (SPOTISAVER).mp3",
     cover: getMp3Art("songs/Gorillaz - Tranz (SPOTISAVER).mp3"),
+    video: "videos/Gorillaz6.mp4",
+    lyrics: "LRC files/Tranz - Gorillaz.lrc"
   },
   {
     title: "Snoop Will Make You Dance", //390
@@ -3210,12 +3212,44 @@ const playlist = [
     src: "songs/SpotiDownloader.com - Silent Running (feat. Adeleye Omotayo) - Gorillaz.mp3",
     cover: getMp3Art("songs/SpotiDownloader.com - Silent Running (feat. Adeleye Omotayo) - Gorillaz.mp3"),
     video: "videos/Gorillaz2.mp4",
+  },
+  {
+    title: "Humility (feat. George Benson)", //479
+    artist: "Gorillaz, George Benson",
+    src: "songs/SpotiDownloader.com - Humility (feat. George Benson) - Gorillaz.mp3",
+    cover: getMp3Art("songs/SpotiDownloader.com - Humility (feat. George Benson) - Gorillaz.mp3"),
+    video: "videos/Gorillaz6.mp4",
+    lrc: "LRC files/Humility (feat. George Benson) - Gorillaz, George Benson.lrc",
+  },
+  {
+    title: "Re-Hash", //480
+    artist: "Gorillaz, Miho Hatori",
+    src: "songs/SpotiDownloader.com - Re-Hash - Gorillaz.mp3",
+    cover: getMp3Art("songs/SpotiDownloader.com - Re-Hash - Gorillaz.mp3"),
+    video: "videos/Gorillaz4.mp4",
+    lrc: "LRC files/Re-Hash - Gorillaz, Miho Hatori.lrc",
+  },
+  {
+    title: "Tarantula", //481
+    artist: "Gorillaz",
+    src: "songs/SpotiDownloader.com - Tarantula - Gorillaz.mp3",
+    cover: getMp3Art("songs/SpotiDownloader.com - Tarantula - Gorillaz.mp3"),
+    video: "videos/Gorillaz2.mp4",
+    lrc: "LRC files/Tarantula - Gorillaz.lrc",
+  },
+  {
+    title: "Rhinestone Eyes", //482
+    artist: "Gorillaz",
+    src: "songs/SpotiDownloader.com - Rhinestone Eyes - Gorillaz.mp3",
+    cover: getMp3Art("songs/SpotiDownloader.com - Rhinestone Eyes - Gorillaz.mp3"),
+    video: "videos/Gorillaz7.mp4",
+    lrc: "LRC files/Rhinestone Eyes - Gorillaz.lrc",
   },/* 
   {
     title: "", //3##
     artist: "",
     src: "songs/",
-    cover: "images/",
+    cover: getMp3Art("songs/"),
     video: "videos/",
     lrc: "LRC files/",
   },*/
@@ -3232,9 +3266,9 @@ const playlistOrder = {
   cumpleaños: [275, 276, 277],
   ROADTRIP: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 112, 114, 116, 119, 120, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 154, 161, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 187, 188, 199, 201, 202, 203, 204, 205, 206, 208, 210, 212, 213, 215, 216, 217, 218, 219, 225, 226, 227, 228, 229, 230, 231, 232, 233, 237, 238, 239, 240, 241, 242, 245, 246, 247, 248, 249, 251, 252, 257, 263, 264, 268, 272, 274, 281, 282, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 311, 312, 313, 314, 315, 316, 317, 318, 319, 321, 324, 325, 328, 329, 330, 331, 332, 337, 338, 339, 340, 341, 342, 343, 366, 367, 368, 369, 371, 437, 438, 439, 440, 441, 442, 443, 444],
   LocosComoYo :[255, 256, 265, 309, 109, 198, 310, 283, 279, 278, 155, 224, 152, 153, 254, 120, 260, 320, 344, 345, 210, 322, 323, 234, 348, 362, 163, 197, 326, 327, 350, 372, 351, 349, 333, 334, 335, 336, 352, 353, 354, 355, 356, 364, 357, 358, 359, 360, 361],
-  Gorillaz: [379, 359, 386, 377, 396, 388, 397, 477, 478, 360, 376, 393, 411, 387, 389, 394, 357, 358, 361, 408, 409, 410, 412, 413, 414, 415, 416, 417, 418, 476, 460, 461],
+  Gorillaz: [379, 359, 386, 377, 482, 387, 477, 388, 479, 411, 376, 389, 397, 414, 460, 476, 360, 418, 478, 393, 415, 417, 357, 416, 410, 412, 413, 461, 396, 480, 394, 358, 361, 408, 409, 481],
   SnoopDogg: [475, 385, 355, 354, 353, 378, 429, 428, 423, 422, 425, 432, 431, 430, 426, 433, 424, 356, 352, 390, 391, 392, 395, 467, 468, 469, 470, 471, 472, 357, 358, 364, 349, 413, 416, 455, 334, 336, 380, 382, 383, 399, 402, 405, 427, 435],
-  absolutePlaylist : [352, 353, 376, 377, 378, 379, 354, 351, 336, 395, 380, 334, 335, 381, 355, 359, 360, 361, 358, 382, 383, 384, 385, 386, 387, 388, 389, 397, 396, 390, 391, 392, 393, 394, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478],
+  absolutePlaylist : [352, 353, 376, 377, 378, 379, 354, 351, 336, 395, 380, 334, 335, 381, 355, 359, 360, 361, 358, 382, 383, 384, 385, 386, 387, 388, 389, 397, 396, 390, 391, 392, 393, 394, 398, 399, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 424, 425, 426, 427, 428, 429, 430, 431, 432, 433, 434, 435, 436, 445, 446, 447, 448, 449, 450, 451, 452, 453, 454, 455, 456, 457, 458, 459, 460, 461, 462, 463, 464, 465, 466, 467, 468, 469, 470, 471, 472, 473, 474, 475, 476, 477, 478, 479, 480, 481, 482],
 };
 
 const artistPages = {
