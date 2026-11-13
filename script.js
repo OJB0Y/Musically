@@ -2668,7 +2668,7 @@ const playlist = [
     src: "songs/Gorillaz - Tranz (SPOTISAVER).mp3",
     cover: getMp3Art("songs/Gorillaz - Tranz (SPOTISAVER).mp3"),
     video: "videos/Gorillaz6.mp4",
-    lyrics: "LRC files/Tranz - Gorillaz.lrc"
+    lrc: "LRC files/Tranz-Gorillaz.lrc",
   },
   {
     title: "Snoop Will Make You Dance", //390
@@ -3218,7 +3218,7 @@ const playlist = [
     artist: "Gorillaz, George Benson",
     src: "songs/SpotiDownloader.com - Humility (feat. George Benson) - Gorillaz.mp3",
     cover: getMp3Art("songs/SpotiDownloader.com - Humility (feat. George Benson) - Gorillaz.mp3"),
-    video: "videos/Gorillaz6.mp4",
+    video: "videos/Gorillaz5.mp4",
     lrc: "LRC files/Humility (feat. George Benson) - Gorillaz, George Benson.lrc",
   },
   {
